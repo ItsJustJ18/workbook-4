@@ -1,10 +1,5 @@
 
 
-
-
-
-
-
 public class Employee {
 
     private int employeeID;
@@ -42,11 +37,11 @@ public class Employee {
     }
 
     public double getRegularPay() {
-        return payRate * regularPay;
+        return payRate * 40;
     }
 
     public double getOvertimePay() {
-        return (payRate*1.5) * overtimePay;
+        return (payRate*1.5) * hoursWorked - 40;
     }
 
 }
