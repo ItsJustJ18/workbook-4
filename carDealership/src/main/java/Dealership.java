@@ -10,12 +10,12 @@ public class Dealership {
     private String phoneNumber;
 
     //Get Arraylist of cars from the inventory csv file
-    public ArrayList<Vehicle> inventory;
+    private ArrayList<Vehicle> inventory;
 
     //"mcQueen" is the shortcut containing the src file for inventory file
    // public static final String mcQueen = "src/main/resources/inventory.csv";
 public Dealership(){
-
+this.inventory = new ArrayList<>();
 }
 
     public Dealership(String name, String address, String phoneNumber) {
@@ -124,4 +124,13 @@ public void removeVehicle(Vehicle v){
     return this.inventory;
     }
 
+    @Override
+    public String toString() {
+        return "Dealership{" +
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", inventory=" + inventory +
+                '}';
+    }
 }
