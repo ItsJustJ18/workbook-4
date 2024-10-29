@@ -6,10 +6,21 @@ public class UserInterface {
     //String decision is used to determine the userInput
     public static String decision;
     //Scanner for the program to determine userInput
-    static Scanner userInput;
+    Scanner user =  new Scanner(System.in);
 
-    public static void main(String[] args) {
-        //Using a while loop in order to send user through screens and options
+    static final DealershipFileManager DEALERSHIP_FILE_MANAGER = new DealershipFileManager();
+    static Dealership dealership;
+
+    private void init() {
+        dealership = DEALERSHIP_FILE_MANAGER.getDealership();
+    }
+
+    public void dealerScreen() {
+
+        //run init method to set up the dealership for the app
+        init();
+
+        System.out.println(dealership);
 
         boolean prevent_leave = true;
         while (prevent_leave) {
@@ -30,36 +41,55 @@ public class UserInterface {
                     8)Exit the Program
                     
                     """);
-
-            decision = userInput.nextLine();
+            decision = user.nextLine();
         }
         switch (decision) {
             //if user wants a vehicle no matter the type between a certain price range
-            case 1:
-                decision = "1";
+            case "1":
+                //sout text block (follow the workbook)
+                //Return method to the switch case
+                //Break
                 System.out.println(" Please enter a minimum and maximum amount that you will spend on a car. ");
-                double carPrice = Double.parseDouble(userInput.nextLine());
-                System.out.print(" Here are the vehicles that are in your requested price range: ");
-
                 break;
-            case 2:
 
-                decision = "2";
+            case "2":
+                //user wants a specific make and model
+                System.out.println(" Enter a make for desired car. ");
+                String make = user.nextLine();
+                System.out.println(" Enter a model for desired car. ");
+                String model = user.nextLine();
+                break;
+
+            case "3":
+                //user wants a specific year
                 System.out.println(" Enter a year for the car you would like. ");
-                int carYear = int.
-                System.out.println("The vehicles below are what meets your needs: ");
-                System.out.print(carYear);
                 break;
+            case "4":
+                //user wants a specific color
+                System.out.println(" Enter a color you would like your car. ");
+                break;
+            case "5":
+                //user wants a set minimum number of mileage and maximum number
+                System.out.println(" Enter the minimum and maximum amount of mileage for a car. ");
+                break;
+            case "6":
 
-            case 3:
-                decision = "3";
-                System.out.println(" ");
-
-
+                placeCarType();
+                System.out.println(" Enter a car type you would like to see. ");
+                break;
+            case "7":
+                System.out.println(dealership);
             default:
                 System.out.println(" The input you have provided is incorrect, please try a valid input. ");
                 break;
         }
+    }
+    public void placeCarType() {
+        //for (Vehicle vehicle)
+
+    }
+    public void carPrice() {
+
 
     }
 }

@@ -116,18 +116,21 @@ public class Dealership {
         for (Vehicle vehicle : inventory)
             if (vehicle.odometer >= min && vehicle.odometer <= max)
             byOdometer.add(vehicle);
+
         return byOdometer;
 
     }
 
     public List<Vehicle> getVehiclesByType(String vehicleType) {
-        List<Vehicle> byvehicleType = new ArrayList<>();
+        List<Vehicle> byVehicleType = new ArrayList<>();
 
-        //logic as needed
+        //if user wants a specific vehicle type
+        for (Vehicle vehicle : inventory)
+            if(vehicle.getVehicleType().equalsIgnoreCase(vehicleType))
 
 
-        return byvehicleType;
-
+        return byVehicleType;
+        return byVehicleType;
     }
 
     public List<Vehicle> getAllVehicles() {
