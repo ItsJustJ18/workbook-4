@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Dealership {
     //global variable for the user from the programmer
-   // String user;
+
     //Dealership is represented as name, address, and phoneNumber
     private String name;
     private String address;
@@ -13,10 +13,10 @@ public class Dealership {
     private ArrayList<Vehicle> inventory;
 
     //"mcQueen" is the shortcut containing the src file for inventory file
-   // public static final String mcQueen = "src/main/resources/inventory.csv";
-public Dealership(){
-this.inventory = new ArrayList<>();
-}
+    // public static final String mcQueen = "src/main/resources/inventory.csv";
+    public Dealership() {
+        this.inventory = new ArrayList<>();
+    }
 
     public Dealership(String name, String address, String phoneNumber) {
         this.name = name;
@@ -52,65 +52,75 @@ this.inventory = new ArrayList<>();
     public void addVehicles(Vehicle vehicle) {
         inventory.add(vehicle);
 
-}
-
-public void removeVehicle(Vehicle v){
-    inventory.remove(v);
     }
 
-    public List<Vehicle> getVehiclesByPrice(double min, double max){
-    List<Vehicle> byPrice = new ArrayList<>();
+    public void removeVehicle(Vehicle v) {
+        inventory.remove(v);
+    }
 
-    //logic as needed
+    public List<Vehicle> getVehiclesByPrice(double min, double max) {
+        List<Vehicle> byPrice = new ArrayList<>();
 
-        for(Vehicle v: inventory){
-            if(v.price < max && v.price > min){
+        //find a price that is the requested price range from the user
+        for (Vehicle v : inventory) {
+            if (v.price < max && v.price > min) {
                 byPrice.add(v);
             }
         }
-
-
-    return byPrice;
+        return byPrice;
 
     }
 
-    public List<Vehicle> getVehiclesByMakeAndModel(String make, String model){
+    public List<Vehicle> getVehiclesByMakeAndModel(String make, String model) {
         List<Vehicle> byMandM = new ArrayList<>();
 
-        //logic as needed
+        //for vehicles found in the vehicle class,
+        for (Vehicle vehicle : inventory)
+            if (vehicle.getMake().equalsIgnoreCase(make) && vehicle.getModel().equalsIgnoreCase(model))
 
+                byMandM.add(vehicle);
 
         return byMandM;
 
     }
-    public List<Vehicle> getVehiclesByYear(int min, int max){
+
+    public List<Vehicle> getVehiclesByYear(int min, int max) {
         List<Vehicle> byYear = new ArrayList<>();
 
-        //logic as needed
-
+        //for vehicles that matches the same input as the userInput
+        for (Vehicle vehicle : inventory)
+            if (vehicle.year < max && vehicle.year > min) {
+                byYear.add((new Vehicle()));
+            }
 
         return byYear;
 
     }
-    public List<Vehicle> getVehiclesByColor(String color){
+
+    public List<Vehicle> getVehiclesByColor(String color) {
         List<Vehicle> byColor = new ArrayList<>();
 
-        //logic as needed
-
+        //user inputs a color desired and adds it to the list
+        for (Vehicle vehicle : inventory)
+            if (vehicle.getColor().equalsIgnoreCase(color))
+                byColor.add(vehicle);
 
         return byColor;
 
     }
-    public List<Vehicle> getVehiclesByOdometer(int min, int max){
+
+    public List<Vehicle> getVehiclesByOdometer(int min, int max) {
         List<Vehicle> byOdometer = new ArrayList<>();
 
-        //logic as needed
-
-
+        //gets the amount of mileage on a vehicle that the user is looking for then returns
+        for (Vehicle vehicle : inventory)
+            if (vehicle.odometer >= min && vehicle.odometer <= max)
+            byOdometer.add(vehicle);
         return byOdometer;
 
     }
-    public List<Vehicle> getVehiclesByType(String vehicleType){
+
+    public List<Vehicle> getVehiclesByType(String vehicleType) {
         List<Vehicle> byvehicleType = new ArrayList<>();
 
         //logic as needed
@@ -120,8 +130,8 @@ public void removeVehicle(Vehicle v){
 
     }
 
-    public List<Vehicle> getAllVehicles(){
-    return this.inventory;
+    public List<Vehicle> getAllVehicles() {
+        return this.inventory;
     }
 
     @Override
@@ -133,4 +143,5 @@ public void removeVehicle(Vehicle v){
                 ", inventory=" + inventory +
                 '}';
     }
+
 }

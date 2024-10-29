@@ -22,7 +22,7 @@ public class DealershipFileManager {
             String line;
             while((line = bufferedReader.readLine()) != null){
 
-                if(line.startsWith("D")){
+                if(line.startsWith("D")) {
                    String[] titleArr = line.split("\\|");
 
                    dealership.setName(titleArr[0]);
@@ -58,7 +58,8 @@ public class DealershipFileManager {
         return dealership;
     }
 
-    public void saveDealership() {
+    public void saveDealership(Dealership dealership) {
+
 
 
     }

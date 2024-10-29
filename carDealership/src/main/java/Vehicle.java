@@ -1,7 +1,5 @@
 public class Vehicle {
 
-   // public static
-
     int vin;
     int year;
     String make;
@@ -12,11 +10,12 @@ public class Vehicle {
     double price;
 
 
-    public Vehicle(){
+    public Vehicle() {
+
 
     }
 
-    public Vehicle(int vin, int year, String make, String model, String vehicleType, String color, int odometer, double price) {
+    public Vehicle(int vin, int year, String make, String model, String vehicleType, String color, int odometer, Double price) {
         this.vin = vin;
         this.year = year;
         this.make = make;
@@ -104,4 +103,5 @@ public class Vehicle {
                 ", price=" + price +
                 '}';
     }
+
 }

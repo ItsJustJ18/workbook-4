@@ -8,7 +8,10 @@ public class Hotel {
         boolean available;
         int beds;
 
-        Room c = new Room()
+        Room c = new Room(500, 3, true, false, false) {
+
+
+
 
 
     }
