@@ -56,6 +56,7 @@ public class UserInterface {
                 //sout text block (follow the workbook)
                 //Return method to the switch case
                 //Break
+                carPrice();
                 System.out.println(" Please enter a minimum and maximum amount that you will spend on a car. ");
                 break;
 
@@ -74,12 +75,14 @@ public class UserInterface {
 
             case "4":
                 //user wants a specific color
+                colorWanted();
                 System.out.println(" Enter a color you would like your car. ");
                 break;
 
             case "5":
                 //user wants a set minimum number of mileage and maximum number
-                mileageOnCar(user.nextInt());
+                mileageOnCar();
+                int min = 0;
                 System.out.println(" Enter the minimum and maximum amount of mileage for a car. ");
                 break;
 
@@ -106,11 +109,17 @@ public class UserInterface {
                 break;
         }
     }
+    public void carPrice() {
+        for (Vehicle vehicle : dealership.getVehiclesByPrice()) {
+            if (vehicle.getPrice() >= min && vehicle.getPrice() <= max) {
+                System.out.println();
+            }
+    }
 
-    private void mileageOnCar(int min, int max) {
+    public void mileageOnCar() {
         for (Vehicle vehicle : dealership.getVehiclesByOdometer()) {
-            if (vehicle.getOdometer() > min && vehicle.getOdometer() < max) {
-                System.out.println(dealership);
+            if (vehicle.getOdometer() >= min && vehicle.getOdometer() <= max) {
+                System.out.println(;
             }
         }
     }
@@ -122,4 +131,11 @@ public class UserInterface {
             System.out.println(dealership);
 
     }
+    public void colorWanted() {
+        for (Vehicle vehicle : dealership) {
+            System.out.println(dealership.getVehiclesByColor());
+        }
+
+    }
+
 }

@@ -11,6 +11,9 @@ public class Dealership {
 
     //Get Arraylist of cars from the inventory csv file
     private ArrayList<Vehicle> inventory;
+    private int min;
+    private int max;
+    private String vehicleType;
 
     //"mcQueen" is the shortcut containing the src file for inventory file
     // public static final String mcQueen = "src/main/resources/inventory.csv";
@@ -109,7 +112,7 @@ public class Dealership {
 
     }
 
-    public List<Vehicle> getVehiclesByOdometer(int min, int max) {
+    public List<Vehicle> getVehiclesByOdometer() {
         List<Vehicle> byOdometer = new ArrayList<>();
 
         //gets the amount of mileage on a vehicle that the user is looking for then returns
@@ -121,7 +124,7 @@ public class Dealership {
 
     }
 
-    public List<Vehicle> getVehiclesByType(String vehicleType) {
+    public List<Vehicle> getVehiclesByType() {
         List<Vehicle> byVehicleType = new ArrayList<>();
 
         //if user wants a specific vehicle type
@@ -148,4 +151,7 @@ public class Dealership {
                 '}';
     }
 
+    public Vehicle[] getVehiclesByPrice() {
+        return null;
+    }
 }
