@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class DealershipFileManager {
 
@@ -60,11 +57,22 @@ public class DealershipFileManager {
     }
 
     public void saveDealership(Dealership dealership) {
+         //after we get the file to be written, we want it to save to our dealership
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(mcQueen, true));
+            bufferedWriter.write("\n");
+            bufferedWriter.write(dealership.toString());
 
+            System.out.println(dealership);
 
+            bufferedWriter.close();
 
+        } catch (Exception exp) {
+            System.out.println(exp.getLocalizedMessage());
+        }
     }
-
-
-
 }
+
+
+
+

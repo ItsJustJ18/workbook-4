@@ -129,6 +129,7 @@ public class Dealership {
             if(vehicle.getVehicleType().equalsIgnoreCase(vehicleType))
 
 
+
         return byVehicleType;
         return byVehicleType;
     }
