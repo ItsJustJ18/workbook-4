@@ -62,6 +62,7 @@ public class UserInterface {
                     //sout text block (follow the workbook)
                     //Return method to the switch case
                     //Break
+
                     min = Integer.parseInt(promptUser("Enter min price"));
                     max = Integer.parseInt(promptUser("Enter max price"));
                     carPrice(min, max);
