@@ -44,7 +44,6 @@ public class DealershipFileManager {
 
                 }
 
-
             }
             bufferedReader.close();
 
@@ -52,19 +51,20 @@ public class DealershipFileManager {
             System.out.println(e.getLocalizedMessage());
         }
 
-
         return dealership;
     }
 
     public void saveDealership(Dealership dealership) {
          //after we get the file to be written, we want it to save to our dealership
         try {
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(mcQueen, true));
-            bufferedWriter.write("\n");
-            bufferedWriter.write(dealership.toString());
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(mcQueen));
+            bufferedWriter.write(dealership.getName()+"|"+dealership.getAddress()+"|"+dealership.getPhoneNumber());
 
+            for(Vehicle v: dealership.getAllVehicles()){
+                bufferedWriter.write("\n");
+                bufferedWriter.write(v.getVin()+"|"+v.getYear()+"|"+v.getMake()+"|"+v.getModel()+"|"+v.getVehicleType()+"|"+v.getColor()+"|"+v.getOdometer()+"|"+v.getPrice());
+            }
             System.out.println(dealership);
-
             bufferedWriter.close();
 
         } catch (Exception exp) {

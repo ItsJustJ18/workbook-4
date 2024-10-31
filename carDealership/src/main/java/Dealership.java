@@ -11,9 +11,6 @@ public class Dealership {
 
     //Get Arraylist of cars from the inventory csv file
     private ArrayList<Vehicle> inventory;
-    private int min;
-    private int max;
-    private String vehicleType;
 
     //"mcQueen" is the shortcut containing the src file for inventory file
     // public static final String mcQueen = "src/main/resources/inventory.csv";
@@ -66,7 +63,7 @@ public class Dealership {
 
         //find a price that is the requested price range from the user
         for (Vehicle v : inventory) {
-            if (v.price < max && v.price > min) {
+            if (v.price <= max && v.price >= min) {
                 byPrice.add(v);
             }
         }
@@ -92,8 +89,8 @@ public class Dealership {
 
         //for vehicles that matches the same input as the userInput
         for (Vehicle vehicle : inventory)
-            if (vehicle.year < max && vehicle.year > min) {
-                byYear.add((new Vehicle()));
+            if (vehicle.year <= max && vehicle.year >= min) {
+                byYear.add(vehicle);
             }
 
         return byYear;
@@ -112,7 +109,7 @@ public class Dealership {
 
     }
 
-    public List<Vehicle> getVehiclesByOdometer() {
+    public List<Vehicle> getVehiclesByOdometer(int min , int max) {
         List<Vehicle> byOdometer = new ArrayList<>();
 
         //gets the amount of mileage on a vehicle that the user is looking for then returns
@@ -124,16 +121,16 @@ public class Dealership {
 
     }
 
-    public List<Vehicle> getVehiclesByType() {
+    public List<Vehicle> getVehiclesByType(String vehicleType) {
         List<Vehicle> byVehicleType = new ArrayList<>();
 
         //if user wants a specific vehicle type
-        for (Vehicle vehicle : inventory)
-            if(vehicle.getVehicleType().equalsIgnoreCase(vehicleType))
+        for (Vehicle vehicle : inventory) {
+            if (vehicle.getVehicleType().equalsIgnoreCase(vehicleType)) {
+                byVehicleType.add(vehicle);
+            }
+        }
 
-
-
-        return byVehicleType;
         return byVehicleType;
     }
 
