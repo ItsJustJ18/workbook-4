@@ -1,9 +1,7 @@
-
 import java.util.List;
 import java.util.Scanner;
 
-
-public class UserInterface {
+public class UserInterfaceTester {
 
     //String decision is used to determine the userInput
     public static String decision;
@@ -66,7 +64,6 @@ public class UserInterface {
                     min = Integer.parseInt(promptUser("Enter min price"));
                     max = Integer.parseInt(promptUser("Enter max price"));
                     carPrice(min, max);
-                    vehicleList(dealership.getVehiclesByPrice(min , max));
                     System.out.println(" Please enter a minimum and maximum amount that you will spend on a car. ");
                     break;
 
@@ -76,8 +73,7 @@ public class UserInterface {
                     String make = user.nextLine();
                     System.out.println(" Enter a model for desired car. ");
                     String model = user.nextLine();
-                    makeAndModel(make, model);
-                    vehicleList(dealership.getVehiclesByMakeAndModel(make, model));
+                    makeAndModel(make,model);
                     break;
 
                 case "3":
@@ -86,14 +82,12 @@ public class UserInterface {
                     min = Integer.parseInt(promptUser("Enter min year:"));
                     max = Integer.parseInt(promptUser("Enter max year:"));
                     byYear(min, max);
-                    vehicleList(dealership.getVehiclesByYear(min, max));
                     break;
 
                 case "4":
                     //user wants a specific color
                     String color = promptUser("What color are you looking for?");
                     colorWanted(color);
-                    vehicleList(dealership.getVehiclesByColor(color));
                     break;
 
                 case "5":
@@ -102,7 +96,7 @@ public class UserInterface {
                     min = Integer.parseInt(promptUser("Enter min mileage"));
                     max = Integer.parseInt(promptUser("Enter max mileage"));
                     mileageOnCar(min, max);
-                    vehicleList(dealership.getVehiclesByOdometer(min, max));
+
 
                     break;
 
@@ -110,12 +104,11 @@ public class UserInterface {
                     //user wants to enter a vehicle type of their choice
                     String type = promptUser(" Enter a car type you would like to see. ");
                     placeCarType(type);
-                    vehicleList(dealership.getVehiclesByType(type));
                     break;
 
                 case "7":
                     //prints out the whole dealership
-                    vehicleList(dealership.getAllVehicles());
+                    System.out.println(dealership);
                     break;
 
                 case "8":
@@ -135,23 +128,6 @@ public class UserInterface {
             }
         } // ends out while loop
     }
-    private void vehicleList(List<Vehicle> vehiclesArrayList) {
-        String vin ="VIN#";
-        String year = "YEAR";
-        String make = "MAKE";
-        String model = "MODEL";
-        String type = "TYPE";
-        String color = "COLOR";
-        String odometer = "ODOMETER";
-        String price = "PRICE";
-        System.out.printf("%15s %15s %15s %15s %15s %15s %15s %15s\n",vin,year,make,model,type,color,odometer,price);
-        for (Vehicle v : vehiclesArrayList) {
-
-            System.out.printf("%15s %15s %15s %15s %15s %15s %15d %15.2f\n",v.getVin(),v.getYear(),v.getMake(),v.getModel(),v.getVehicleType(),v.getColor(),v.getOdometer(),v.getPrice());
-        }
-
-
-    }
 
     private void byYear(int min, int max) {
 
@@ -165,37 +141,32 @@ public class UserInterface {
     public void carPrice(int min, int max) {
         List<Vehicle> results = dealership.getVehiclesByPrice(min, max);
         displayVehicles(results);
-        //logic for the user to be able to search for car price based on their inputs
     }
 
     public void mileageOnCar(int min, int max) {
-        List<Vehicle> results = dealership.getVehiclesByOdometer(min, max);
+        List<Vehicle> results = dealership.getVehiclesByOdometer(min,max);
         displayVehicles(results);
-        //logic for the user to be able to search for car mileage based on their inputs
     }
 
     public void placeCarType(String type) {
         List<Vehicle> results = dealership.getVehiclesByType(type);
         displayVehicles(results);
-        //logic for the user to be able to search car type based on their inputs
-    }
 
+    }
     public void colorWanted(String color) {
-        List<Vehicle> results = dealership.getVehiclesByColor(color);
+        List<Vehicle> results = dealership.getVehiclesByColor(color) ;
         displayVehicles(results);
-        //logic for the user to be able to search for car color based on their inputs
     }
 
-    public void makeAndModel(String make, String model) {
-        List<Vehicle> results = dealership.getVehiclesByMakeAndModel(make, model);
+    public void makeAndModel(String make, String model){
+        List<Vehicle> results =  dealership.getVehiclesByMakeAndModel(make,model);
         displayVehicles(results);
-        //logic for the user to be able to search car make and model based on their inputs
     }
 
 
     // these are our helper methods.
 // helps us by allowing us to pass in the print we cant the user to see and return the value they input
-    private String promptUser(String prompt) {
+    private String promptUser(String prompt){
         System.out.println(prompt);
         return user.nextLine();
 
@@ -203,22 +174,22 @@ public class UserInterface {
 
     //this method allows us to check to see if a query or a request yields a result (aka an arraylist of vehicles)
     //if it doesn't it print our a notification and  if it does it, prints out the vehicles
-    public void displayVehicles(List<Vehicle> cars) {
+    public void displayVehicles(List<Vehicle> cars){
 
-        if (cars.isEmpty()) {
+        if(cars.isEmpty()){
             System.out.println("Sorry!No cars fit that description");
         } else {
-            for (Vehicle vehicle : cars) {
+            for (Vehicle vehicle :cars) {
                 System.out.println(vehicle);
             }
         }
     }
 
-    private void adminMenu() {
+    private void adminMenu(){
         String adminPasscode = "CarSales";
         String codeFromUser = promptUser("Please enter passcode");
         boolean passed = true;
-        if (adminPasscode.equalsIgnoreCase(codeFromUser)) {
+        if(adminPasscode.equalsIgnoreCase(codeFromUser)){
 
             addOrRemoveCarMenu();
             passed = false;
@@ -227,41 +198,39 @@ public class UserInterface {
 
     }
 
-    private void addOrRemoveCarMenu() {
+    private void addOrRemoveCarMenu(){
         System.out.println("1) Add car");
         System.out.println("2) Remove Car");
-        System.out.println("3) Go back to previous screen");
 
-        int choice = Integer.parseInt(promptUser(" Would you like to add or remove a car from dealership? If not, press 3 to return to previous screen."));
+        int choice = Integer.parseInt(promptUser("Would you like to add or remove a car?"));
 
-        switch (choice) {
+        switch (choice){
             case 1:
-                // add in car info to csv file and saves
+                // add in car info
                 dealership.addVehicles(addVehicleInfo());
                 DEALERSHIP_FILE_MANAGER.saveDealership(dealership);
                 break;
 
             case 2:
-                int vinNo = Integer.parseInt(promptUser("Enter vin# of the vehicle you want to remove. "));
+                int vinNo = Integer.parseInt(promptUser("Whats the vin of the vehicle yould like to remove?"));
 
                 List<Vehicle> cars = dealership.getAllVehicles();
-                for (Vehicle v : cars) {
+                for(Vehicle v:cars){
 
-                    if (v.getVin() == vinNo) {
+                    if (v.getVin() == vinNo){
                         dealership.removeVehicle(v);
                         break; //breaks out of if statement once we find car
                     }
                 }
-                //removes vehicle from the csv file
                 DEALERSHIP_FILE_MANAGER.saveDealership(dealership);
                 break; //breaks out of switch case
-
         }
 
-    }
 
-    public Vehicle addVehicleInfo() {
-        //set and requesting input from the user in order to add the vehicle to file (from admin bypass code)
+
+    }
+    public Vehicle addVehicleInfo(){
+        //set and requesting input from the user in order to add the vehicle to file
 
         Vehicle newV = new Vehicle();
         int vin = Integer.parseInt(promptUser(" Enter vehicle vin "));
@@ -289,8 +258,8 @@ public class UserInterface {
         newV.setPrice(price);
 
         return newV;
-        //returns the new vehicle made then printed into the dealership as a new vehicle
 
     }
 
 }
+
