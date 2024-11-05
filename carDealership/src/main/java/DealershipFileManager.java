@@ -5,8 +5,6 @@ public class DealershipFileManager {
      public static final String mcQueen = "src/main/resources/inventory.csv";
 
      public DealershipFileManager(){
-
-
      }
 
     public Dealership getDealership() {
