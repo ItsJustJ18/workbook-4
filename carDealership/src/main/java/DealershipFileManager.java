@@ -1,3 +1,5 @@
+import salesLease.Contract;
+
 import java.io.*;
 
 public class DealershipFileManager {

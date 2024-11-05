@@ -28,20 +28,6 @@ public class SalesContract extends Contract {
         }
     }
 
-    // Method to calculate the monthly payment
-    private static double calculateMonthlyPayment(double principal, double annualInterestRate, int months) {
-        // Convert annual interest rate to a monthly rate
-        double monthlyInterestRate = annualInterestRate / 100 / 12;
-
-        //calculate monthly payment
-        if (monthlyInterestRate == 0) { // If no interest
-            return principal / months;
-        } else {
-            return principal * (monthlyInterestRate * Math.pow(1 + monthlyInterestRate, months)) /
-                    (Math.pow(1 + monthlyInterestRate, months) - 1);
-        }
-    }
-
     public double getSalesTax() {
         return salesTax;
     }
