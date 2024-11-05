@@ -1,5 +1,9 @@
 package salesLease;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public abstract class Contract {
@@ -13,6 +17,7 @@ public abstract class Contract {
     protected String vehicleSold;
     protected double totalPrice;
     protected double monthlyPayment;
+    private List<Contract> allContracts = new ArrayList<>();
 
     public Contract(String date, String customerName, String customerEmail, String vehicleSold, double totalPrice, double monthlyPayment) {
         //Get specific private variables from the contract reading
@@ -71,6 +76,11 @@ public abstract class Contract {
     public void setMonthlyPayment(double monthlyPayment) {
         this.monthlyPayment = monthlyPayment;
     }
+
+    public List<Contract> getAllContracts() {
+        return allContracts;
+    }
+
     // Method to calculate the monthly payment
     protected double calculateMonthlyPayment(double principal, double annualInterestRate, int months) {
         // Convert annual interest rate to a monthly rate
@@ -82,6 +92,24 @@ public abstract class Contract {
         } else {
             return principal * (monthlyInterestRate * Math.pow(1 + monthlyInterestRate, months)) /
                     (Math.pow(1 + monthlyInterestRate, months) - 1);
+        }
+    }
+
+    public saveContract(Contract contract) {
+        //after we get the file to be written, we want it to save to our contract
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("src/main/java/resources/contract.csv"));
+            bufferedWriter.write(contract.getDate() + "|" + contract.getCustomerName() + "|" + contract.getCustomerEmail()) + "|" + contract.getVehicleSold() + "|" + contract.getTotalPrice() + "|" + contract.getMonthlyPayment();
+
+            for (Contract v : contract.getAllContracts()) {
+                bufferedWriter.write("\n");
+                bufferedWriter.write(v.getDate() + "|" + v.getCustomerName() + "|" + v.getCustomerEmail() + "|" + v.getVehicleSold() + "|" + v.getTotalPrice() + "|" + v.getMonthlyPayment());
+            }
+            System.out.println(contract);
+            bufferedWriter.close();
+
+        } catch (Exception exp) {
+            System.out.println(exp.getLocalizedMessage());
         }
     }
 }
