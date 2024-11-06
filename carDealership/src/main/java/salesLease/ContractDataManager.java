@@ -1,8 +1,9 @@
 package salesLease;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
-import java.io.IOException;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class ContractDataManager {
@@ -14,62 +15,63 @@ public class ContractDataManager {
     //Display contract readings from contract file
     ArrayList<Contract> contracts;
 
-    public void saveContract(Contract contract) {
+
+    public void getContract() {
+
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(contractReader));
+
+            String line;
+            while (true) {
+                if ((line = bufferedReader.readLine()) == null) {
+                    break;
+                }
+
+                if (line.startsWith("S")) {
+                    String[] lineArr = line.split("\\|");
+
+                    Contract contractFromFile = new SalesContract(
+                            lineArr[0], lineArr[1], lineArr[2], lineArr[3], Boolean.parseBoolean(lineArr[4]), Double.parseDouble(lineArr[5]), Double.parseDouble(lineArr[6])
+                    );
+                    contracts.add(contractFromFile);
+
+                } else if (line.startsWith("L")) {
+                    String[] lineArr = line.split("\\|");
+
+                    Contract contractFromFile = new LeaseContract(
+                            lineArr[0], lineArr[1], lineArr[2], lineArr[3], Double.parseDouble(lineArr[4]), Double.parseDouble(lineArr[5])
+                    );
+
+                    contracts.add(contractFromFile);
+                } else {
+                    System.out.println(" Unrecognized contract identified. Make sure it's either a Sale or Lease contract. ");
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getLocalizedMessage());
+        }
+        System.out.println(contracts);
     }
 
-    public Contract getContract() {
+    public void saveContract(Contract contract) {
+        //after we get the file to be written, we want it to save to our contract
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("src/main/java/resources/contract.csv"));
+            bufferedWriter.write(contract.getDate() + "|" + contract.getCustomerName() + "|" + contract.getCustomerEmail()  + "|" + contract.getVehicleSold() + "|" + contract.getTotalPrice()  + "|" + contract.getMonthlyPayment());
 
-        Contract contract = new Contract() {
-        try
-
-            {
-                BufferedReader bufferedReader = new BufferedReader(contractReader));
-
-                String line;
-                while (true) {
-                    try {
-                        if (!((line = bufferedReader.readLine()) != null)) break;
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-
-                    if (line.startsWith("S")) {
-                        String[] titleArr = line.split("\\|");
-
-                        contract.setDate(titleArr[0]);
-                        contract.setCustomerName(titleArr[1]);
-                        contract.setCustomerEmail(titleArr[2]);
-
-                    } else {
-                        String[] lineArr = line.split("\\|");
-
-                        Contract contractFromFile = new Contract() {
-
-                        }
-                        {
-
-                            contractFromFile.setDate((lineArr[0]));
-                            contractFromFile.setCustomerName((lineArr[1]));
-                            contractFromFile.setCustomerEmail(lineArr[2]);
-                            contractFromFile.setVehicleSold(lineArr[3]);
-                            contractFromFile.setTotalPrice(Integer.parseInt(lineArr[4]));
-                            contractFromFile.setMonthlyPayment(Integer.parseInt(lineArr[5]));
-
-                            contract.getAllContracts().add(contractFromFile);
-
-                        }
-
-                    }
-
-
-                }
-                catch(Exception e){
-                System.out.println(e.getLocalizedMessage());
+            for (Contract v : contract.getAllContracts()) {
+                bufferedWriter.write("\n");
+                bufferedWriter.write(v.getDate() + "|" + v.getCustomerName() + "|" + v.getCustomerEmail() + "|" + v.getVehicleSold() + "|" + v.getTotalPrice() + "|" + v.getMonthlyPayment());
             }
+            System.out.println(contract);
+            bufferedWriter.close();
 
-
-            }
+        } catch (Exception exp) {
+            System.out.println(exp.getLocalizedMessage());
         }
-
     }
 }
+
+
+
